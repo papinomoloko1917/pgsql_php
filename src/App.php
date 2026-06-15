@@ -4,24 +4,26 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Controller\Product;
-use App\Database\Connect;
+use App\Container\Container;
+use Throwable;
 
 final class App
 {
-    public function __construct(
-    ) {
+    private readonly Container $container;
+
+    public function __construct()
+    {
+        $this->container = new Container();
     }
     public function run(): void
     {
-        $db = Connect::fromEnv();
+        try {
+            $targetRoute = $this->container->router->handle();
 
-        $product = new Product($db);
+            echo $this->container->dispatcher->dispatch($targetRoute);
 
-        if ($_SERVER['REQUEST_URI'] === '/add_product') {
-            $product->store();
+        } catch (Throwable $e) {
+            echo $e->getMessage();
         }
-
-        echo $product->index();
     }
 }

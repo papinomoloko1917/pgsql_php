@@ -24,6 +24,12 @@ services:
       DB_DATABASE: ${POSTGRES_DB}
       DB_USERNAME: ${POSTGRES_ROOT_USER}
       DB_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+      POSTGRES_CONTAINER_NAME: ${POSTGRES_CONTAINER_NAME}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_ROOT_USER: ${POSTGRES_ROOT_USER}
+      POSTGRES_ROOT_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+      POSTGRES_CONNECT_TIMEOUT: ${POSTGRES_CONNECT_TIMEOUT}
     depends_on:
       postgres:
         condition: service_healthy
@@ -44,8 +50,7 @@ services:
       - postgres_data:/var/lib/postgresql
       - ./postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test:
-        ["CMD-SHELL", 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      test: [ "CMD-SHELL", 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"' ]
       interval: 5s
       timeout: 5s
       retries: 10
