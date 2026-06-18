@@ -8,14 +8,16 @@ use App\View\View;
 
 class ProductController extends Controller
 {
-    public function index()    {
+    public function index(): string
+    {
         return $this->view('products/showProducts', [
-            'currentPath'=>$this->view->getCurrentPath(),
-            'title'=>'Список товаров'
+            'currentPath' => $this->view->getCurrentPath(),
+            'title' => 'Список товаров'
         ]);
     }
 
-    public function storeProduct(){
+    public function storeProduct()
+    {
 
     }
 }

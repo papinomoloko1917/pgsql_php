@@ -7,7 +7,7 @@ namespace App\Database;
 use PDO;
 use RuntimeException;
 
-final class Connection
+final class Database
 {
     private readonly string $username;
     private readonly string $password;

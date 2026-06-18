@@ -11,8 +11,9 @@ class HomeController extends Controller
     public function index(): string
     {
         return $this->view('home', [
-            'currentPath'=>$this->view->getCurrentPath(),
-            'title'=>'Главная'
+            'currentPath' => $this->view->getCurrentPath(),
+            'title' => 'Главная'
         ]);
+
     }
 }

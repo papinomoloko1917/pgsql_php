@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Container;
 
+use App\Database\Database;
 use App\Dispatcher\Dispatcher;
 use App\Factory\ControllerFactory;
 use App\Request\Request;
 use App\Router\Router;
 use App\View\View;
-use Dba\Connection;
 
 final class Container
 {
@@ -19,7 +19,7 @@ final class Container
     public readonly ControllerFactory $controllerFactory;
     public readonly Dispatcher $dispatcher;
     public readonly View $view;
-    public readonly Connection $conn;
+    public readonly Database $db;
 
     public function __construct()
     {
@@ -38,12 +38,12 @@ final class Container
 
         $this->view = new View();
 
-        $this->conn = new Connection();
+        $this->db = new Database();
 
         $this->controllerFactory = new ControllerFactory(
             $this->request,
             $this->view,
-            $this->conn
+            $this->db
         );
 
         $this->dispatcher = new Dispatcher(

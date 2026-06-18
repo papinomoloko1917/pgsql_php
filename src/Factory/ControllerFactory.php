@@ -6,25 +6,31 @@ namespace App\Factory;
 
 use App\Controller\Controller;
 use App\Controller\ProductController;
+use App\Database\Database;
 use App\Request\Request;
 use App\View\View;
-use Dba\Connection;
 
-final class ControllerFactory {
+final class ControllerFactory
+{
     public function __construct(
         private readonly Request $request,
         private readonly View $view,
-        private readonly Connection $conn
-    ){
+        private readonly Database $db
+    ) {
     }
-    public function make(string $controllerClass):Controller
+    public function make(string $controllerClass): Controller
     {
-        if($controllerClass === ProductController::class){
+        if ($controllerClass === ProductController::class) {
             return new $controllerClass(
                 $this->request,
                 $this->view,
-                $this->conn
+                $this->db
             );
         }
+        return new $controllerClass(
+            $this->request,
+            $this->view,
+            $this->db
+        );
     }
 }
