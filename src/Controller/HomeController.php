@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Database\migration\createProductTable;
 use App\View\View;
 
 class HomeController extends Controller
@@ -14,6 +15,5 @@ class HomeController extends Controller
             'currentPath' => $this->view->getCurrentPath(),
             'title' => 'Главная'
         ]);
-
     }
 }

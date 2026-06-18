@@ -11,5 +11,7 @@ return [
     Route::get('/', [HomeController::class, 'index']),
     Route::get('/about', [AboutController::class, 'index']),
     Route::get('/showProducts', [ProductController::class, 'index']),
-    Route::get('/storeProduct', [ProductController::class, 'storeIndex'])
+
+    Route::get('/storeProduct', [ProductController::class, 'storeIndex']),
+    Route::post('/storeProduct', [ProductController::class, 'storeProduct']),
 ];
