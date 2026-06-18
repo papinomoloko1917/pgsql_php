@@ -16,8 +16,11 @@ class ProductController extends Controller
         ]);
     }
 
-    public function storeProduct()
+    public function storeIndex()
     {
-
+        return $this->view('products/storeProduct', [
+            'currentPath' => $this->view->getCurrentPath(),
+            'title' => 'Добавление товара'
+        ]);
     }
 }
