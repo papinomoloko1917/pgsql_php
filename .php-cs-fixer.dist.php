@@ -1,16 +1,20 @@
 <?php
 
-$finder = (new PhpCsFixer\Finder())
+$finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->exclude([
-        'storage',
-        'bootstrap/cache',
-    ]);
+        'vendor',
+        '.git',
+        '.vscode',
+        'node_modules',
+    ])
+    ->name('*.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true);
 
 return (new PhpCsFixer\Config())
+    ->setRiskyAllowed(false)
     ->setRules([
         '@PSR12' => true,
     ])
-    ->setIndent('    ')
-    ->setLineEnding("\n")
     ->setFinder($finder);

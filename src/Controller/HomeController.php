@@ -6,14 +6,13 @@ namespace App\Controller;
 
 use App\View\View;
 
-class HomeController
+class HomeController extends Controller
 {
-    public function __construct(
-        private readonly View $view
-    ) {
-    }
     public function index(): string
     {
-        return $this->view->page('home');
+        return $this->view('home', [
+            'currentPath'=>$this->view->getCurrentPath(),
+            'title'=>'Главная'
+        ]);
     }
 }

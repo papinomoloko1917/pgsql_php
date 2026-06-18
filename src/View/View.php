@@ -6,8 +6,12 @@ namespace App\View;
 
 final class View
 {
-    public function page(string $namePage): string
+    private string $currentPath = '/';
+
+    public function render(string $namePage, array $data = []): string
     {
+        extract($data);
+
         ob_start();
         require APP_PATH . "/public/view/pages/$namePage.php";
         $content = ob_get_clean();
@@ -17,5 +21,15 @@ final class View
         $layout = ob_get_clean();
 
         return $layout;
+    }
+
+    public function setCurrentPath(string $pagePath): void
+    {
+        $this->currentPath = $pagePath;
+    }
+
+    public function getCurrentPath()
+    {
+        return $this->currentPath;
     }
 }

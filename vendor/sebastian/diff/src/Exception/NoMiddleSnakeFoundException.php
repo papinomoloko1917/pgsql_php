@@ -9,13 +9,15 @@
  */
 namespace SebastianBergmann\Diff;
 
+use LogicException;
+
 /**
- * @deprecated https://github.com/sebastianbergmann/diff/pull/138
+ * @codeCoverageIgnore
  */
-interface LongestCommonSubsequenceCalculator
+final class NoMiddleSnakeFoundException extends LogicException implements Exception
 {
-    /**
-     * Calculates the longest common subsequence of two arrays.
-     */
-    public function calculate(array $from, array $to): array;
+    public function __construct()
+    {
+        parent::__construct('No middle snake found; input invariants violated');
+    }
 }

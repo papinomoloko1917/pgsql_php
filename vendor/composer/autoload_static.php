@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitecff71e3173a8102d10b38f690973048
+class ComposerStaticInit04335bc5fb2da51ecc9f52a7dda8cd53
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -264,15 +264,12 @@ class ComposerStaticInitecff71e3173a8102d10b38f690973048
         'SebastianBergmann\\Diff\\Differ' => __DIR__ . '/..' . '/sebastian/diff/src/Differ.php',
         'SebastianBergmann\\Diff\\Exception' => __DIR__ . '/..' . '/sebastian/diff/src/Exception/Exception.php',
         'SebastianBergmann\\Diff\\Line' => __DIR__ . '/..' . '/sebastian/diff/src/Line.php',
-        'SebastianBergmann\\Diff\\LongestCommonSubsequenceCalculator' => __DIR__ . '/..' . '/sebastian/diff/src/LongestCommonSubsequenceCalculator.php',
-        'SebastianBergmann\\Diff\\MemoryEfficientLongestCommonSubsequenceCalculator' => __DIR__ . '/..' . '/sebastian/diff/src/MemoryEfficientLongestCommonSubsequenceCalculator.php',
-        'SebastianBergmann\\Diff\\Output\\AbstractChunkOutputBuilder' => __DIR__ . '/..' . '/sebastian/diff/src/Output/AbstractChunkOutputBuilder.php',
+        'SebastianBergmann\\Diff\\MyersDiff' => __DIR__ . '/..' . '/sebastian/diff/src/MyersDiff.php',
+        'SebastianBergmann\\Diff\\NoMiddleSnakeFoundException' => __DIR__ . '/..' . '/sebastian/diff/src/Exception/NoMiddleSnakeFoundException.php',
         'SebastianBergmann\\Diff\\Output\\DiffOnlyOutputBuilder' => __DIR__ . '/..' . '/sebastian/diff/src/Output/DiffOnlyOutputBuilder.php',
         'SebastianBergmann\\Diff\\Output\\DiffOutputBuilderInterface' => __DIR__ . '/..' . '/sebastian/diff/src/Output/DiffOutputBuilderInterface.php',
         'SebastianBergmann\\Diff\\Output\\StrictUnifiedDiffOutputBuilder' => __DIR__ . '/..' . '/sebastian/diff/src/Output/StrictUnifiedDiffOutputBuilder.php',
-        'SebastianBergmann\\Diff\\Output\\UnifiedDiffOutputBuilder' => __DIR__ . '/..' . '/sebastian/diff/src/Output/UnifiedDiffOutputBuilder.php',
         'SebastianBergmann\\Diff\\Parser' => __DIR__ . '/..' . '/sebastian/diff/src/Parser.php',
-        'SebastianBergmann\\Diff\\TimeEfficientLongestCommonSubsequenceCalculator' => __DIR__ . '/..' . '/sebastian/diff/src/TimeEfficientLongestCommonSubsequenceCalculator.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
@@ -281,9 +278,9 @@ class ComposerStaticInitecff71e3173a8102d10b38f690973048
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitecff71e3173a8102d10b38f690973048::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitecff71e3173a8102d10b38f690973048::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitecff71e3173a8102d10b38f690973048::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit04335bc5fb2da51ecc9f52a7dda8cd53::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit04335bc5fb2da51ecc9f52a7dda8cd53::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit04335bc5fb2da51ecc9f52a7dda8cd53::$classMap;
 
         }, null, ClassLoader::class);
     }
