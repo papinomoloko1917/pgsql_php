@@ -7,8 +7,10 @@ namespace App\Container;
 use App\Database\Database;
 use App\Dispatcher\Dispatcher;
 use App\Factory\ControllerFactory;
+use App\Model\Product;
 use App\Request\Request;
 use App\Router\Router;
+use App\Validator\ProductValidator;
 use App\View\View;
 
 final class Container
@@ -20,6 +22,8 @@ final class Container
     public readonly Dispatcher $dispatcher;
     public readonly View $view;
     public readonly Database $db;
+    public readonly ProductValidator $productValidator;
+    public readonly Product $productModel;
 
     public function __construct()
     {
@@ -40,10 +44,18 @@ final class Container
 
         $this->db = new Database();
 
+        $this->productValidator = new ProductValidator();
+
+        $this->productModel = new Product(
+            $this->db,
+            $this->productValidator
+        );
+
         $this->controllerFactory = new ControllerFactory(
             $this->request,
             $this->view,
-            $this->db
+            $this->db,
+            $this->productModel
         );
 
         $this->dispatcher = new Dispatcher(
