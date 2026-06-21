@@ -12,7 +12,8 @@ class Request
         private readonly string $uri,
         private readonly string $method,
         private readonly string $path,
-        private readonly array $post
+        private readonly array $post,
+        private readonly array $get
     ) {
     }
     public static function createFromGlobals()
@@ -34,11 +35,14 @@ class Request
 
         $post = $_POST ?? [];
 
+        $get = $_GET ?? [];
+
         return new self(
             uri: $uri,
             method: $method,
             path: $path,
-            post: $post
+            post: $post,
+            get: $get
         );
     }
     public function getPath(): string
@@ -63,5 +67,9 @@ class Request
             return $this->post[$name];
         }
         return null;
+    }
+    public function query(string $name): ?string
+    {
+        return $this->get[$name] ?? null;
     }
 }

@@ -14,4 +14,8 @@ return [
 
     Route::get('/storeProduct', [ProductController::class, 'storeIndex']),
     Route::post('/storeProduct', [ProductController::class, 'storeProduct']),
+
+    Route::get('/editProductIndex', [ProductController::class, 'editProductIndex']),
+    Route::post('/updateProduct', [ProductController::class, 'updateProduct']),
+    Route::post('/deleteProduct', [ProductController::class, 'deleteProduct']),
 ];

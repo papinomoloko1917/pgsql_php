@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Container;
 
 use App\Database\Database;
+use App\Database\Seeder\ProductsSeeder;
 use App\Dispatcher\Dispatcher;
 use App\Factory\ControllerFactory;
 use App\Model\Product;
 use App\Request\Request;
 use App\Router\Router;
+use App\Session\Flash;
 use App\Validator\ProductValidator;
 use App\View\View;
 
@@ -24,6 +26,8 @@ final class Container
     public readonly Database $db;
     public readonly ProductValidator $productValidator;
     public readonly Product $productModel;
+    public readonly Flash $flash;
+    public readonly ProductsSeeder $productsSeeder;
 
     public function __construct()
     {
@@ -51,11 +55,19 @@ final class Container
             $this->productValidator
         );
 
+        $this->flash = new Flash();
+
+        $this->productsSeeder = new ProductsSeeder(
+            $this->db
+        );
+
         $this->controllerFactory = new ControllerFactory(
             $this->request,
             $this->view,
             $this->db,
-            $this->productModel
+            $this->productModel,
+            $this->flash,
+            $this->productsSeeder
         );
 
         $this->dispatcher = new Dispatcher(

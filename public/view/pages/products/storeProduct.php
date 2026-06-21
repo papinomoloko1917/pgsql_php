@@ -1,3 +1,4 @@
+<h5>Добавление товара</h5>
 <form action="/storeProduct" method="POST">
     <div class="mb-3">
         <label for="title" class="form-label">Название</label>
@@ -22,4 +23,5 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Добавить</button>
+    <a type="button" href="/showProducts" class="btn btn-primary">Назад к товарам</a>
 </form>

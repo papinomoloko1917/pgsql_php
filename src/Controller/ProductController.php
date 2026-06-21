@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Database\Database;
+use App\Database\seeder\ProductsSeeder;
 use App\Model\Product;
 use App\Request\Request;
+use App\Session\Flash;
 use App\View\View;
 
 class ProductController extends Controller
@@ -15,7 +17,9 @@ class ProductController extends Controller
         Request $request,
         View $view,
         Database $db,
-        private readonly Product $productModel
+        private readonly Product $productModel,
+        private readonly Flash $flash,
+        private readonly ProductsSeeder $productsSeeder
     ) {
         parent::__construct($request, $view, $db);
     }
@@ -37,10 +41,9 @@ class ProductController extends Controller
             'title' => 'Добавление товара'
         ]);
     }
-    public function storeProduct()
+    public function storeProduct(): string
     {
         $title = $this->request->input('title');
-
         $description = $this->request->input('description');
         $price = $this->request->input('price');
 
@@ -57,7 +60,69 @@ class ProductController extends Controller
             ]);
         }
 
-        header('Location: /');
+        $this->flash->success('Товар успешно добавлен');
+
+        header('Location: /showProducts');
+        exit;
+    }
+
+    public function editProductIndex(): string
+    {
+        $id = (int) $this->request->query('id');
+
+        $findProduct = $this->productModel->findById($id);
+
+        if ($findProduct === null) {
+            header('Location: /showProducts');
+            exit;
+        }
+
+        return $this->view('products/editProductIndex', [
+            'currentPath' => $this->view->getCurrentPath(),
+            'title' => 'Редактирование товара',
+            'product' => $findProduct
+        ]);
+    }
+    public function updateProduct(): string
+    {
+
+        $id = (int) $this->request->input('id');
+        $title = $this->request->input('title');
+        $description = $this->request->input('description');
+        $price = $this->request->input('price');
+
+        $errors = $this->productModel->update($id, $title, $description, $price);
+
+
+        if (!empty($errors)) {
+            return $this->view('products/editProductIndex', [
+                'currentPath' => $this->view->getCurrentPath(),
+                'title' => 'Редактирование товара',
+                'errors' => $errors,
+                'product' => [
+                    'id' => $id,
+                    'title' => $title,
+                    'description' => $description,
+                    'price' => $price,
+                ],
+            ]);
+        }
+
+        $this->flash->success('Товар успешно изменен');
+
+        header('Location: /showProducts');
+        exit;
+    }
+
+    public function deleteProduct(): void
+    {
+        $id = (int)$this->request->input('id');
+
+        $this->productModel->delete($id);
+
+        $this->flash->success('Товар успешно удален');
+
+        header('Location: /showProducts');
         exit;
     }
 }

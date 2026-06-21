@@ -1,7 +1,7 @@
 <?php
 $navmenu = [
   'Главная' => '/',
-  'Товары'=>'/showProducts',
+  'Товары' => '/showProducts',
   'О нас' => '/about'
 ];
 $currentPath = $currentPath ?? '/';
@@ -16,12 +16,15 @@ $currentPath = $currentPath ?? '/';
       <ul class="navbar-nav nav-underline">
         <?php foreach ($navmenu as $key => $value):?>
             <li class="nav-item">
-              <a class="nav-link <?= ($currentPath === $value) ? 'active' : '' ?>" <?= ($currentPath===$value) ? 'aria-current="page"' : '' ?> href="<?= $value ?>"><?= $key ?></a>
+              <a class="nav-link <?= ($currentPath === $value) ? 'active' : '' ?>" <?= ($currentPath === $value) ? 'aria-current="page"' : '' ?> href="<?= $value ?>"><?= $key ?></a>
             </li>
         <?php
         endforeach
-        ?>
+?>
       </ul>
+      <div class="ms-auto">
+        <a href="/register" class="btn btn-sm btn-outline-dark">Регистрация</a>
+      </div>
     </div>
   </div>
 </nav>
