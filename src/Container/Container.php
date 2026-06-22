@@ -27,7 +27,6 @@ final class Container
     public readonly ProductValidator $productValidator;
     public readonly Product $productModel;
     public readonly Flash $flash;
-    public readonly ProductsSeeder $productsSeeder;
 
     public function __construct()
     {
@@ -57,17 +56,12 @@ final class Container
 
         $this->flash = new Flash();
 
-        $this->productsSeeder = new ProductsSeeder(
-            $this->db
-        );
-
         $this->controllerFactory = new ControllerFactory(
             $this->request,
             $this->view,
             $this->db,
             $this->productModel,
             $this->flash,
-            $this->productsSeeder
         );
 
         $this->dispatcher = new Dispatcher(

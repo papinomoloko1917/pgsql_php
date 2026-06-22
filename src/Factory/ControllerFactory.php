@@ -7,7 +7,6 @@ namespace App\Factory;
 use App\Controller\Controller;
 use App\Controller\ProductController;
 use App\Database\Database;
-use App\Database\seeder\ProductsSeeder;
 use App\Model\Product;
 use App\Request\Request;
 use App\Session\Flash;
@@ -21,7 +20,6 @@ final class ControllerFactory
         private readonly Database $db,
         private readonly Product $productModel,
         private readonly Flash $flash,
-        private readonly ProductsSeeder $productsSeeder
     ) {
     }
     public function make(string $controllerClass): Controller
@@ -33,7 +31,6 @@ final class ControllerFactory
                 $this->db,
                 $this->productModel,
                 $this->flash,
-                $this->productsSeeder
             );
         }
         return new $controllerClass(

@@ -8,18 +8,17 @@ use App\Database\Database;
 
 final class ProductsSeeder
 {
-    public function __construct(
-        private readonly Database $db
-    ) {
-    }
-    public function seed(): void
+    public function __construct()
     {
-        $repository = $this->repository();
+    }
+    public static function seed(Database $db): void
+    {
+        $repository = self::repository();
 
         foreach ($repository as $object) {
             $sql = "INSERT INTO products (title,description,price) VALUES (:title,:description,:price)";
 
-            $stmt = $this->db->conn()->prepare($sql);
+            $stmt = $db->conn()->prepare($sql);
 
             $stmt->execute([
                 ':title' => $object['title'],
@@ -28,7 +27,7 @@ final class ProductsSeeder
             ]);
         }
     }
-    private function repository(): array
+    private static function repository(): array
     {
         return [
             ['title' => 'Ноутбук', 'description' => 'Отличный ноутбук c wifi', 'price' => 500],

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Database\Database;
-use App\Database\seeder\ProductsSeeder;
 use App\Model\Product;
 use App\Request\Request;
 use App\Session\Flash;
@@ -19,7 +18,6 @@ class ProductController extends Controller
         Database $db,
         private readonly Product $productModel,
         private readonly Flash $flash,
-        private readonly ProductsSeeder $productsSeeder
     ) {
         parent::__construct($request, $view, $db);
     }
