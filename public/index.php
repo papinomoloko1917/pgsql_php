@@ -2,14 +2,23 @@
 
 declare(strict_types=1);
 
-use App\App;
+use App\Controller\HomeController;
+use App\Controller\TestsController;
+use App\Database\Database;
 
 define('APP_PATH', dirname(__DIR__));
 
 require APP_PATH . '/vendor/autoload.php';
 
-session_start();
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$app = new App();
+if ($path === '/' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $controller = new HomeController();
 
-$app->run();
+    echo $controller->index();
+} elseif ($path === '/tests' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $controller = new TestsController();
+    echo $controller->index();
+} else {
+    echo '404 | Not Found';
+}

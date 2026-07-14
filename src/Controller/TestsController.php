@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-class HomeController
+class TestsController
 {
     public function index(): string
     {
         ob_start();
-        require_once APP_PATH . '/public/view/pages/home.php';
+        require_once APP_PATH . '/public/view/pages/tests.php';
         $content = ob_get_clean();
 
         ob_start();

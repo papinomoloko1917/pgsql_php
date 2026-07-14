@@ -2,20 +2,39 @@
 
 declare(strict_types=1);
 
+define('APP_PATH', __DIR__);
+
 require __DIR__ . '/vendor/autoload.php';
 
-$filePath = $argv[0];
-$command = $argv[1];
+use App\Database\Database;
 
-switch ($command) {
-    case 'migrate':
-        require_once __DIR__ . '/bin/migration.php';
-        break;
-    case 'seed':
-        require_once __DIR__ . '/bin/seeder.php';
-        break;
-    default:
-        echo "Неизвестная команда: $command\n";
-        echo "Доступные команды: migrate, seed\n";
-        exit(1);
+$command = $argv[2];
+
+if ($argv[1] === 'migrate') {
+    if ($command === 'questions') {
+
+        $sql = "CREATE TABLE IF NOT EXISTS {$command} (
+id SERIAL PRIMARY KEY,
+title VARCHAR(250) NOT NULL,
+question_text TEXT NOT NULL,
+answer1 TEXT NOT NULL,
+answer2 TEXT NOT NULL,
+answer3 TEXT NOT NULL,
+answer4 TEXT NOT NULL,
+true_answer INT NOT NULL CHECK (true_answer BETWEEN 1 AND 4),
+created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+)";
+
+        $db = new Database();
+
+        $conn = $db->conn();
+
+        $conn->exec($sql);
+
+        echo "Таблица {$command} создана";
+    }
+} elseif ($argv[1] === 'seeder') {
+    require APP_PATH . '/bin/seeder/questions.php';
+} else {
+    echo "Ошибка";
 }
