@@ -19,6 +19,9 @@ if ($path === '/' && $_SERVER['REQUEST_METHOD'] === 'GET') {
 } elseif ($path === '/tests' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $controller = new TestsController();
     echo $controller->index();
+} elseif ($path === '/showTests' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $controller = new TestsController();
+    echo $controller->showTests();
 } else {
     echo '404 | Not Found';
 }
